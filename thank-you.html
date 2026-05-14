@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
+  <title>Thank You — Relien Property Maintenance</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css?v=11" />
+  <style>
+    .thank-you-page {
+      min-height: calc(100vh - 80px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 80px 24px;
+      background: linear-gradient(180deg, var(--cream) 0%, var(--white) 100%);
+      text-align: center;
+    }
+    .thank-you-card {
+      max-width: 560px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 56px 40px;
+      box-shadow: var(--shadow-lg);
+    }
+    .thank-you-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 24px;
+      border-radius: 50%;
+      background: var(--navy);
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .thank-you-icon svg { width: 40px; height: 40px; }
+    .thank-you-card h1 {
+      font-size: 2rem;
+      margin: 0 0 12px;
+    }
+    .thank-you-card p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      line-height: 1.6;
+      margin-bottom: 28px;
+    }
+    .thank-you-actions {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html#home" class="brand">
+        <img src="images/logo-icon.png" alt="" class="brand-logo" />
+        <span class="brand-name">Relien Property Maintenance</span>
+      </a>
+    </div>
+  </header>
+
+  <main class="thank-you-page">
+    <div class="thank-you-card">
+      <div class="thank-you-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 6L9 17l-5-5"/>
+        </svg>
+      </div>
+      <h1>Thanks &mdash; we got your message.</h1>
+      <p>Andrew will be in touch within one business day to schedule a consultation or maintenance visit. In the meantime, feel free to learn more about what we do.</p>
+      <div class="thank-you-actions">
+        <a href="index.html" class="btn btn-primary">Back to Home</a>
+        <a href="index.html#services" class="btn btn-secondary">View Services</a>
+      </div>
+    </div>
+  </main>
+
+</body>
+</html>
