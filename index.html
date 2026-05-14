@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=14" />
+  <link rel="stylesheet" href="styles.css?v=15" />
 </head>
 <body>
 
@@ -132,13 +132,8 @@
         </article>
 
       </div>
-    </div>
-  </section>
 
-  <!-- ============ BUILT FOR (rental/property types band) ============ -->
-  <section class="built-for reveal">
-    <div class="container">
-      <div class="built-for-band">
+      <div class="built-for-band reveal">
         <p class="built-for-label">Built for</p>
         <ul class="built-for-list">
           <li>Homeowners</li>
@@ -389,7 +384,6 @@
         <input type="hidden" name="_subject" value="New quote request from relienpm.com" />
         <input type="hidden" name="_template" value="table" />
         <input type="hidden" name="_captcha" value="false" />
-        <input type="hidden" name="_next" value="https://relienpm.com/thank-you.html" />
         <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
 
         <div class="form-row">
@@ -490,6 +484,23 @@
     </div>
   </footer>
 
+  <!-- ============ THANK-YOU MODAL ============ -->
+  <div id="thank-modal" class="modal thank-modal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-backdrop" data-close-thank></div>
+    <div class="modal-card thank-card">
+      <button class="modal-close" data-close-thank aria-label="Close">&times;</button>
+      <div class="thank-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 6L9 17l-5-5"/>
+        </svg>
+      </div>
+      <p class="modal-eyebrow">Message Received</p>
+      <h3>Got it. Step away from the toolbox.</h3>
+      <p class="thank-body">Andrew will reach out within one business day. In the meantime, save the YouTube plumbing tutorials for entertainment &mdash; not instruction.</p>
+      <button type="button" class="btn btn-primary" data-close-thank>Sounds good</button>
+    </div>
+  </div>
+
   <!-- ============ FLOATING QUOTE CTA ============ -->
   <button class="floating-cta" data-open="quote-modal" aria-label="Get a quote">
     <svg class="cta-spark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -516,7 +527,6 @@
         <input type="hidden" name="_subject" value="New quote request from relienpm.com" />
         <input type="hidden" name="_template" value="table" />
         <input type="hidden" name="_captcha" value="false" />
-        <input type="hidden" name="_next" value="https://relienpm.com/thank-you.html" />
         <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
 
         <div class="modal-step is-active" data-step="1">
@@ -662,6 +672,75 @@
       window.addEventListener('scroll', toggleCta, { passive: true });
       toggleCta();
     }
+
+    // ===== Thank-you modal =====
+    const thankModal = document.getElementById('thank-modal');
+    const openThank = () => {
+      if (!thankModal) return;
+      thankModal.classList.add('is-open');
+      thankModal.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('no-scroll');
+    };
+    const closeThank = () => {
+      if (!thankModal) return;
+      thankModal.classList.remove('is-open');
+      thankModal.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('no-scroll');
+    };
+    if (thankModal) {
+      thankModal.querySelectorAll('[data-close-thank]').forEach((el) =>
+        el.addEventListener('click', closeThank)
+      );
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && thankModal.classList.contains('is-open')) closeThank();
+      });
+    }
+
+    // ===== Intercept FormSubmit submissions, show thank-you popup =====
+    document.querySelectorAll('form[action*="formsubmit.co"]').forEach((form) => {
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const originalLabel = submitBtn ? submitBtn.textContent : null;
+        if (submitBtn) {
+          submitBtn.disabled = true;
+          submitBtn.textContent = 'Sending…';
+        }
+
+        // Transform action into AJAX endpoint
+        const ajaxUrl = form.action.replace(
+          /formsubmit\.co\/(?!ajax)/,
+          'formsubmit.co/ajax/'
+        );
+
+        try {
+          const formData = new FormData(form);
+          const res = await fetch(ajaxUrl, {
+            method: 'POST',
+            body: formData,
+            headers: { Accept: 'application/json' },
+          });
+          if (!res.ok) throw new Error('Form submission failed (HTTP ' + res.status + ')');
+          form.reset();
+          // Close the quote modal if this form lived inside it
+          const parentQuoteModal = form.closest('#quote-modal');
+          if (parentQuoteModal && parentQuoteModal.classList.contains('is-open')) {
+            parentQuoteModal.classList.remove('is-open');
+            parentQuoteModal.setAttribute('aria-hidden', 'true');
+            document.body.classList.remove('no-scroll');
+          }
+          openThank();
+        } catch (err) {
+          alert('Hmm — something went wrong sending your message. Please try again, or reach out through one of the platforms in the footer.');
+          console.error(err);
+        } finally {
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = originalLabel;
+          }
+        }
+      });
+    });
   </script>
 </body>
 </html>

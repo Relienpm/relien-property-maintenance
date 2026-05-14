@@ -1037,22 +1037,6 @@ li { margin-bottom: .35em; }
   from { opacity: 0; transform: scale(0.88); }
   to   { opacity: 1; transform: scale(1); }
 }
-.hero-image::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -60%;
-  width: 50%;
-  height: 100%;
-  background: linear-gradient(120deg, transparent 25%, rgba(255, 255, 255, 0.55) 50%, transparent 75%);
-  transform: skewX(-12deg);
-  animation: sheenSweep 1.6s 1.0s ease-out forwards;
-  pointer-events: none;
-  z-index: 2;
-}
-@keyframes sheenSweep {
-  to { left: 140%; }
-}
 
 /* Slight crispening of the hero PNG (best-effort) */
 .hero-logo {
@@ -1060,21 +1044,21 @@ li { margin-bottom: .35em; }
 }
 
 /* ============================================================
-   "Built for" — property types band
+   "Built for" — property types band (grouped under services-grid)
    ============================================================ */
 
-.built-for {
-  padding: 36px 0;
-  background: var(--white);
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-}
 .built-for-band {
+  margin-top: 56px;
+  padding: 28px 32px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 28px;
   flex-wrap: wrap;
+  box-shadow: var(--shadow-sm);
 }
 .built-for-label {
   margin: 0;
@@ -1442,6 +1426,49 @@ body.no-scroll { overflow: hidden; }
   gap: 12px;
 }
 .modal-actions .btn { padding: 12px 22px; font-size: 0.9rem; }
+
+/* Thank-you success modal — different visual treatment */
+.thank-card {
+  text-align: center;
+  max-width: 480px;
+  padding: 48px 36px 36px;
+}
+.thank-icon {
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-soft) 100%);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 22px;
+  box-shadow: 0 12px 30px rgba(20, 42, 71, 0.25);
+  animation: thankPop 0.55s cubic-bezier(.34, 1.56, .64, 1) backwards;
+}
+.thank-icon svg { width: 42px; height: 42px; }
+@keyframes thankPop {
+  from { opacity: 0; transform: scale(0.4); }
+  to   { opacity: 1; transform: scale(1); }
+}
+.thank-card .modal-eyebrow {
+  color: var(--red);
+  margin-bottom: 8px;
+}
+.thank-card h3 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.6rem;
+  color: var(--navy);
+  margin: 0 0 12px;
+  line-height: 1.25;
+}
+.thank-body {
+  font-size: 0.98rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin: 0 0 28px;
+}
+.thank-card > .btn { min-width: 180px; }
 
 /* ============================================================
    Responsive — tablet & mobile
