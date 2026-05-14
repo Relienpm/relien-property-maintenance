@@ -693,40 +693,91 @@ li { margin-bottom: .35em; }
 .footer-legal p { margin: 0 0 6px; }
 
 /* ============================================================
-   Service tile art — abstract shapes, no photos
+   Service tiles — text-only, editorial style
    ============================================================ */
 
-.service-art {
+.service-card {
   position: relative;
-  aspect-ratio: 4 / 3;
+  background: var(--white);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  border-top: 4px solid var(--navy);
+  box-shadow: var(--shadow-sm);
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-top-color 0.35s ease;
 }
-.service-art .art-svg {
-  width: 100%;
-  height: 100%;
-  display: block;
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 0;
+  background: linear-gradient(180deg, rgba(30, 58, 95, 0.04) 0%, transparent 100%);
+  transition: height 0.4s ease;
+  pointer-events: none;
 }
-.service-art .shape {
-  transform-origin: center;
-  transform-box: fill-box;
-  will-change: transform;
+.service-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 24px 60px rgba(20, 42, 71, 0.16);
+  border-top-color: var(--red);
 }
-.service-art .shape-a { animation: floatA 6.5s ease-in-out 0s infinite alternate; }
-.service-art .shape-b { animation: floatB 7.5s ease-in-out 0.4s infinite alternate; }
-.service-art .shape-c { animation: floatC 5.5s ease-in-out 0.8s infinite alternate; }
-.service-art .shape-d { animation: floatD 4.5s ease-in-out 0.2s infinite alternate; }
-.service-art .shape-e { animation: floatE 6s   ease-in-out 1.0s infinite alternate; }
-.service-art .shape-e2 { animation: floatE 5.5s ease-in-out 0.6s infinite alternate; }
+.service-card:hover::before { height: 100%; }
 
-@keyframes floatA { from { transform: translate(0,0); } to { transform: translate(-10px, -14px); } }
-@keyframes floatB { from { transform: translate(0,0); } to { transform: translate(10px, 8px); } }
-@keyframes floatC { from { transform: translate(0,0); } to { transform: translate(-6px, 10px); } }
-@keyframes floatD { from { transform: translate(0,0) scale(1); } to { transform: translate(3px, -6px) scale(1.18); } }
-@keyframes floatE { from { transform: translate(0,0); } to { transform: translate(4px, -4px); } }
+.service-num {
+  position: absolute;
+  top: 12px;
+  right: 28px;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 5.5rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--pale-blue);
+  opacity: 0.55;
+  pointer-events: none;
+  z-index: 0;
+  transition: color 0.35s ease, opacity 0.35s ease, transform 0.35s ease;
+}
+.service-card:hover .service-num {
+  color: var(--red);
+  opacity: 0.32;
+  transform: translateY(-4px);
+}
 
-/* Stronger card lift on hover (cards already have base transition) */
-.service-card { transition: transform 0.35s ease, box-shadow 0.35s ease; }
-.service-card:hover { transform: translateY(-8px); box-shadow: 0 24px 60px rgba(20, 42, 71, 0.18); }
+.service-label {
+  font-family: 'Inter', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--navy-soft);
+  margin: 0 0 0.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.service-card .service-body {
+  position: relative;
+  z-index: 1;
+  padding: 44px 36px 38px;
+  flex: 1;
+}
+.service-card .service-body h3 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.55rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin: 0 0 0.85rem;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+.service-card .service-body > p {
+  color: var(--text-muted);
+  font-size: 0.98rem;
+  margin: 0 0 1.25rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--border);
+}
 
 /* ============================================================
    Network of specialists section
