@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=13" />
+  <link rel="stylesheet" href="styles.css?v=14" />
 </head>
 <body>
 
@@ -28,7 +28,7 @@
         <a href="#about">About</a>
         <a href="#contact">Contact</a>
       </nav>
-      <a href="#contact" class="header-cta">Get a Quote</a>
+      <a href="#contact" class="header-cta" data-open="quote-modal">Get a Quote</a>
     </div>
   </header>
 
@@ -40,11 +40,17 @@
       </div>
       <div class="hero-content">
         <p class="eyebrow">Birmingham, AL &nbsp;·&nbsp; Fully Insured</p>
-        <h1>Reliability you can <span class="pencil-word">rest<svg class="pencil-underline" viewBox="0 0 100 12" preserveAspectRatio="none" aria-hidden="true"><path d="M2,10 Q50,1 98,10"/></svg></span> on.</h1>
+        <h1 class="kinetic-h1">
+          <span class="word" style="--i:0">Reliability</span>
+          <span class="word" style="--i:1">you</span>
+          <span class="word" style="--i:2">can</span>
+          <span class="word pencil-host" style="--i:3"><span class="pencil-word">rest<svg class="pencil-underline" viewBox="0 0 100 12" preserveAspectRatio="none" aria-hidden="true"><path d="M2,10 Q50,1 98,10"/></svg></span></span>
+          <span class="word" style="--i:4">on.</span>
+        </h1>
         <p class="slogan">Reliable Property Maintenance Services for Your Property</p>
-        <p class="lede">Trusted property maintenance for homes and businesses &mdash; repairs, improvements, and emergency response, done right the first time.</p>
+        <p class="lede">Trusted property maintenance for homes, businesses, and rental properties &mdash; repairs, improvements, and emergency response, done right the first time.</p>
         <div class="hero-actions">
-          <a href="#contact" class="btn btn-primary">Request a Quote</a>
+          <a href="#contact" class="btn btn-primary" data-open="quote-modal">Request a Quote</a>
           <a href="#services" class="btn btn-secondary">Explore Services</a>
         </div>
       </div>
@@ -61,6 +67,7 @@
         <p class="eyebrow">About Relien</p>
         <h2>Dedicated to Reliable Property Maintenance</h2>
         <p>Welcome to Relien Property Maintenance LLC, your reliable partner for all your property maintenance needs. We take pride in delivering top-quality service for residential and commercial properties.</p>
+        <p>We work with homeowners, business owners, and rental property investors who need reliable service that protects their property's value and respects their tenants' time.</p>
         <p>Our commitment is to ensure that your property is safe, well-maintained, and in top condition at all times. Explore how we can help you with our wide range of property maintenance solutions.</p>
         <a href="#services" class="btn btn-primary">Discover Our Services</a>
       </div>
@@ -87,7 +94,7 @@
               <li>Door, window &amp; lock fixes</li>
               <li>Plumbing &amp; faucet repair</li>
               <li>Light electrical work</li>
-              <li>Routine property upkeep</li>
+              <li>Tenant turnover repairs</li>
             </ul>
           </div>
         </article>
@@ -103,7 +110,7 @@
               <li>Fixture &amp; hardware upgrades</li>
               <li>Tile &amp; flooring updates</li>
               <li>Bathroom &amp; kitchen refresh</li>
-              <li>Trim, molding &amp; finish carpentry</li>
+              <li>Make-ready &amp; pre-listing refreshes</li>
             </ul>
           </div>
         </article>
@@ -119,10 +126,84 @@
               <li>Leaks &amp; water damage</li>
               <li>Broken locks &amp; doors</li>
               <li>Power &amp; outlet issues</li>
-              <li>Storm &amp; weather damage</li>
+              <li>After-hours tenant emergency calls</li>
             </ul>
           </div>
         </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ BUILT FOR (rental/property types band) ============ -->
+  <section class="built-for reveal">
+    <div class="container">
+      <div class="built-for-band">
+        <p class="built-for-label">Built for</p>
+        <ul class="built-for-list">
+          <li>Homeowners</li>
+          <li class="divider" aria-hidden="true"></li>
+          <li>Business owners</li>
+          <li class="divider" aria-hidden="true"></li>
+          <li>Landlords &amp; property managers</li>
+        </ul>
+        <p class="built-for-tagline">One contact for the entire portfolio.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ HOW WE WORK ============ -->
+  <section id="process" class="process">
+    <div class="container">
+      <header class="section-header reveal">
+        <p class="eyebrow">How We Work</p>
+        <h2>A Process Built on Reliability</h2>
+      </header>
+      <div class="process-steps reveal-stagger">
+
+        <div class="step">
+          <span class="step-num">01</span>
+          <div class="step-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/>
+            </svg>
+          </div>
+          <h3>Request</h3>
+          <p>Submit a quote request through our form. We'll be in touch within one business day.</p>
+        </div>
+
+        <div class="step">
+          <span class="step-num">02</span>
+          <div class="step-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="4" y="4" width="16" height="18" rx="2"/><path d="M9 4V2h6v2"/><path d="M8 10h8"/><path d="M8 14h8"/><path d="M8 18h5"/>
+            </svg>
+          </div>
+          <h3>Detail Collection</h3>
+          <p>We'll discuss your needs, walk the property if needed, and gather the details to scope the work properly.</p>
+        </div>
+
+        <div class="step">
+          <span class="step-num">03</span>
+          <div class="step-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6"/><path d="M9 17h4"/>
+            </svg>
+          </div>
+          <h3>Quote</h3>
+          <p>You'll receive a clear, written quote with scope, pricing, and timing &mdash; no surprises, no pressure.</p>
+        </div>
+
+        <div class="step">
+          <span class="step-num">04</span>
+          <div class="step-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 6L9 17l-5-5"/>
+            </svg>
+          </div>
+          <h3>Service</h3>
+          <p>We complete the work on schedule, with quality you can rely on. We follow up after to confirm everything's right.</p>
+        </div>
 
       </div>
     </div>
@@ -295,11 +376,11 @@
       <div class="contact-intro">
         <p class="eyebrow">Get In Touch</p>
         <h2>Request a Quote</h2>
-        <p>Tell us about your property and what you're looking to take care of. We'll reach out within one business day to schedule a consultation or maintenance visit.</p>
+        <p>Tell us about your property &mdash; home, business, or rental &mdash; and what you're looking to take care of. We usually reach out within one business day to schedule a consultation or maintenance visit.</p>
         <ul class="contact-info">
           <li><strong>Service Area</strong> Birmingham, AL &amp; surrounding communities</li>
-          <li><strong>Response Time</strong> Within one business day</li>
-          <li><strong>Coverage</strong> Residential &amp; commercial properties</li>
+          <li><strong>Response Time</strong> Usually within one business day</li>
+          <li><strong>Coverage</strong> Residential, commercial &amp; rental properties</li>
         </ul>
       </div>
 
@@ -409,6 +490,89 @@
     </div>
   </footer>
 
+  <!-- ============ FLOATING QUOTE CTA ============ -->
+  <button class="floating-cta" data-open="quote-modal" aria-label="Get a quote">
+    <svg class="cta-spark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/>
+    </svg>
+    <span class="cta-label">Get a Quote</span>
+  </button>
+
+  <!-- ============ QUOTE MODAL ============ -->
+  <div id="quote-modal" class="modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modal-title">
+    <div class="modal-backdrop" data-close></div>
+    <div class="modal-card" role="document">
+      <button class="modal-close" data-close aria-label="Close">&times;</button>
+
+      <div class="modal-progress" aria-hidden="true">
+        <span class="progress-step is-active"><span>1</span></span>
+        <span class="progress-bar"></span>
+        <span class="progress-step"><span>2</span></span>
+        <span class="progress-bar"></span>
+        <span class="progress-step"><span>3</span></span>
+      </div>
+
+      <form class="modal-form" action="https://formsubmit.co/info@relienpm.com" method="POST">
+        <input type="hidden" name="_subject" value="New quote request from relienpm.com" />
+        <input type="hidden" name="_template" value="table" />
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="hidden" name="_next" value="https://relienpm.com/thank-you.html" />
+        <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
+
+        <div class="modal-step is-active" data-step="1">
+          <p class="modal-eyebrow">Step 1 of 3</p>
+          <h3 id="modal-title">Let's start with you</h3>
+          <p class="modal-sub">Tell us how to reach you. We usually respond within one business day.</p>
+          <div class="form-row">
+            <label><span>First name *</span><input type="text" name="First Name" required autocomplete="given-name" /></label>
+            <label><span>Last name *</span><input type="text" name="Last Name" required autocomplete="family-name" /></label>
+          </div>
+          <label><span>Email *</span><input type="email" name="Email" required autocomplete="email" /></label>
+          <label><span>Phone</span><input type="tel" name="Phone" autocomplete="tel" /></label>
+          <div class="modal-actions">
+            <span></span>
+            <button type="button" class="btn btn-primary" data-next>Next &rarr;</button>
+          </div>
+        </div>
+
+        <div class="modal-step" data-step="2">
+          <p class="modal-eyebrow">Step 2 of 3</p>
+          <h3>About the property</h3>
+          <p class="modal-sub">A quick detail or two helps us scope the work appropriately.</p>
+          <fieldset class="radio-group">
+            <legend>What kind of property?</legend>
+            <label class="radio-row"><input type="radio" name="Property Type" value="Home" /><span>Home</span></label>
+            <label class="radio-row"><input type="radio" name="Property Type" value="Business" /><span>Business</span></label>
+            <label class="radio-row"><input type="radio" name="Property Type" value="Rental" /><span>Rental property</span></label>
+            <label class="radio-row"><input type="radio" name="Property Type" value="Other" /><span>Other</span></label>
+          </fieldset>
+          <label><span>City or area</span><input type="text" name="Location" placeholder="e.g. Hoover, AL" autocomplete="address-level2" /></label>
+          <div class="modal-actions">
+            <button type="button" class="btn btn-secondary" data-back>&larr; Back</button>
+            <button type="button" class="btn btn-primary" data-next>Next &rarr;</button>
+          </div>
+        </div>
+
+        <div class="modal-step" data-step="3">
+          <p class="modal-eyebrow">Step 3 of 3</p>
+          <h3>What do you need?</h3>
+          <p class="modal-sub">A brief description is fine &mdash; we'll get the details on the call.</p>
+          <label><span>How can we help? *</span><textarea name="Message" rows="4" required></textarea></label>
+          <div class="form-consent">
+            <label class="checkbox-row">
+              <input type="checkbox" name="SMS Consent" value="I consent to receive SMS messages" />
+              <span>By checking this box and providing my phone number, I agree to receive SMS text messages from Relien Property Maintenance LLC regarding my inquiry. Message and data rates may apply. Reply STOP to opt out. See our <a href="privacy.html">Privacy Policy</a>.</span>
+            </label>
+          </div>
+          <div class="modal-actions">
+            <button type="button" class="btn btn-secondary" data-back>&larr; Back</button>
+            <button type="submit" class="btn btn-primary">Submit Request</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
 
@@ -426,6 +590,77 @@
       reveals.forEach((el) => io.observe(el));
     } else {
       reveals.forEach((el) => el.classList.add('is-visible'));
+    }
+
+    // ===== Quote modal =====
+    const modal = document.getElementById('quote-modal');
+    if (modal) {
+      const openTriggers = document.querySelectorAll('[data-open="quote-modal"]');
+      const closeTriggers = modal.querySelectorAll('[data-close], .modal-close');
+      const steps = modal.querySelectorAll('.modal-step');
+      const progressSteps = modal.querySelectorAll('.modal-progress .progress-step');
+      const progressBars = modal.querySelectorAll('.modal-progress .progress-bar');
+      let currentStep = 1;
+
+      const showStep = (n) => {
+        steps.forEach((s) => s.classList.toggle('is-active', Number(s.dataset.step) === n));
+        progressSteps.forEach((p, i) => p.classList.toggle('is-active', i < n));
+        progressBars.forEach((b, i) => b.classList.toggle('is-filled', i < n - 1));
+        currentStep = n;
+        const active = modal.querySelector('.modal-step.is-active');
+        const firstInput = active && active.querySelector('input, textarea');
+        if (firstInput) setTimeout(() => firstInput.focus(), 60);
+      };
+      const openModal = () => {
+        modal.classList.add('is-open');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('no-scroll');
+        showStep(1);
+      };
+      const closeModal = () => {
+        modal.classList.remove('is-open');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('no-scroll');
+      };
+
+      openTriggers.forEach((t) => {
+        t.addEventListener('click', (e) => {
+          e.preventDefault();
+          openModal();
+        });
+      });
+      closeTriggers.forEach((t) => t.addEventListener('click', closeModal));
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
+      });
+
+      modal.querySelectorAll('[data-next]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const current = modal.querySelector(`.modal-step[data-step="${currentStep}"]`);
+          const fields = current.querySelectorAll('input[required], textarea[required]');
+          let valid = true;
+          fields.forEach((f) => {
+            if (!f.checkValidity()) {
+              f.reportValidity();
+              valid = false;
+            }
+          });
+          if (valid) showStep(currentStep + 1);
+        });
+      });
+      modal.querySelectorAll('[data-back]').forEach((btn) => {
+        btn.addEventListener('click', () => showStep(currentStep - 1));
+      });
+    }
+
+    // ===== Floating CTA visibility =====
+    const floatingCta = document.querySelector('.floating-cta');
+    if (floatingCta) {
+      const toggleCta = () => {
+        floatingCta.classList.toggle('is-visible', window.scrollY > 600);
+      };
+      window.addEventListener('scroll', toggleCta, { passive: true });
+      toggleCta();
     }
   </script>
 </body>
