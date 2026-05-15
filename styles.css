@@ -1477,6 +1477,78 @@ body.no-scroll { overflow: hidden; }
 }
 .thank-card > .btn { min-width: 180px; }
 
+/* ============================================================
+   File upload — styled native input
+   ============================================================ */
+
+.file-field {
+  margin: 8px 0 18px;
+}
+.file-field-label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 8px;
+}
+.file-field-control {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  cursor: pointer;
+}
+.file-field-control input[type="file"] {
+  /* Hide the native input — we trigger it via the surrounding label */
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+.file-field-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 16px;
+  background: var(--white);
+  border: 1px solid var(--navy);
+  color: var(--navy);
+  border-radius: var(--radius-sm);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.file-field-control:hover .file-field-button {
+  background: var(--navy);
+  color: var(--white);
+}
+.file-field-control input[type="file"]:focus-visible + .file-field-button {
+  outline: 2px solid var(--navy);
+  outline-offset: 2px;
+}
+.file-field-status {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  word-break: break-word;
+}
+.file-field-status.has-files {
+  color: var(--navy);
+  font-weight: 500;
+}
+.file-field-help {
+  margin: 8px 0 0;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
 /* Inline form error banner */
 .form-error {
   display: none;

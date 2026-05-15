@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=17" />
+  <link rel="stylesheet" href="styles.css?v=18" />
 </head>
 <body>
 
@@ -414,6 +414,21 @@
           <textarea name="Message" rows="5" required></textarea>
         </label>
 
+        <div class="file-field">
+          <span class="file-field-label">Attach photos (optional)</span>
+          <label class="file-field-control">
+            <input type="file" name="attachments" multiple accept="image/jpeg,image/png,image/heic,image/heif,image/webp,application/pdf" />
+            <span class="file-field-button" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16">
+                <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/>
+              </svg>
+              Add files
+            </span>
+            <span class="file-field-status">No files selected</span>
+          </label>
+          <p class="file-field-help">Images or PDFs. Up to 20 MB total. Helps us scope the work before we visit.</p>
+        </div>
+
         <div class="form-consent">
           <label class="checkbox-row">
             <input type="checkbox" name="SMS Consent" value="I consent to receive SMS messages" />
@@ -510,9 +525,9 @@
         </svg>
       </div>
       <p class="modal-eyebrow">Message Received</p>
-      <h3>Got it. Step away from the toolbox.</h3>
-      <p class="thank-body">Andrew will reach out within one business day. In the meantime, save the YouTube plumbing tutorials for entertainment, not instruction.</p>
-      <button type="button" class="btn btn-primary" data-close-thank>Sounds good</button>
+      <h3>Thank you for reaching out.</h3>
+      <p class="thank-body">Andrew will be in touch within one business day to discuss your request. We appreciate the opportunity to earn your business.</p>
+      <button type="button" class="btn btn-primary" data-close-thank>Close</button>
     </div>
   </div>
 
@@ -580,6 +595,20 @@
           <h3>What do you need?</h3>
           <p class="modal-sub">A brief description is fine. We'll get the details on the call.</p>
           <label><span>How can we help? *</span><textarea name="Message" rows="4" required></textarea></label>
+          <div class="file-field">
+            <span class="file-field-label">Attach photos (optional)</span>
+            <label class="file-field-control">
+              <input type="file" name="attachments" multiple accept="image/jpeg,image/png,image/heic,image/heif,image/webp,application/pdf" />
+              <span class="file-field-button" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16">
+                  <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/>
+                </svg>
+                Add files
+              </span>
+              <span class="file-field-status">No files selected</span>
+            </label>
+            <p class="file-field-help">Images or PDFs. Up to 20 MB total.</p>
+          </div>
           <div class="form-consent">
             <label class="checkbox-row">
               <input type="checkbox" name="SMS Consent" value="I consent to receive SMS messages" />
@@ -728,6 +757,38 @@
       if (banner) banner.classList.remove('is-visible');
     };
 
+    // ===== File-upload UI: show selected file names + size =====
+    const MAX_TOTAL_BYTES = 20 * 1024 * 1024; // 20 MB
+    document.querySelectorAll('.file-field input[type="file"]').forEach((input) => {
+      input.addEventListener('change', () => {
+        const status = input.closest('.file-field').querySelector('.file-field-status');
+        const files = Array.from(input.files || []);
+        if (files.length === 0) {
+          status.textContent = 'No files selected';
+          status.classList.remove('has-files');
+          return;
+        }
+        const total = files.reduce((s, f) => s + f.size, 0);
+        const mb = (total / 1024 / 1024).toFixed(1);
+        status.textContent = files.length === 1
+          ? `${files[0].name} (${mb} MB)`
+          : `${files.length} files (${mb} MB)`;
+        status.classList.add('has-files');
+      });
+    });
+
+    // Helper: read a File as base64 (no data: prefix)
+    const fileToBase64 = (file) => new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => {
+        const result = String(reader.result);
+        const base64 = result.includes(',') ? result.split(',')[1] : result;
+        resolve(base64);
+      };
+      reader.onerror = () => reject(reader.error);
+      reader.readAsDataURL(file);
+    });
+
     // ===== Intercept form submissions to Worker, show thank-you popup =====
     document.querySelectorAll('.contact-form, .modal-form').forEach((form) => {
       form.addEventListener('submit', async (e) => {
@@ -740,12 +801,35 @@
           submitBtn.textContent = 'Sending…';
         }
 
+        // Collect text fields (skip file inputs — handled separately)
         const data = {};
         new FormData(form).forEach((value, key) => {
+          if (value instanceof File) return;
           data[key] = value;
         });
 
+        // Collect files (if any) and validate size
+        const fileInput = form.querySelector('input[type="file"]');
+        const files = fileInput ? Array.from(fileInput.files || []) : [];
+        const totalBytes = files.reduce((s, f) => s + f.size, 0);
+        if (totalBytes > MAX_TOTAL_BYTES) {
+          showFormError(form, 'Attachments are too large. Please keep total under 20 MB.');
+          if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = originalLabel; }
+          return;
+        }
+
         try {
+          if (files.length > 0) {
+            if (submitBtn) submitBtn.textContent = 'Uploading…';
+            data.attachments = await Promise.all(
+              files.map(async (file) => ({
+                filename: file.name,
+                content: await fileToBase64(file),
+              }))
+            );
+            if (submitBtn) submitBtn.textContent = 'Sending…';
+          }
+
           const res = await fetch(form.action, {
             method: 'POST',
             body: JSON.stringify(data),
@@ -763,6 +847,11 @@
           }
 
           form.reset();
+          // Reset file-field display too
+          form.querySelectorAll('.file-field-status').forEach((s) => {
+            s.textContent = 'No files selected';
+            s.classList.remove('has-files');
+          });
           const parentQuoteModal = form.closest('#quote-modal');
           if (parentQuoteModal && parentQuoteModal.classList.contains('is-open')) {
             parentQuoteModal.classList.remove('is-open');
