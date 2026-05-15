@@ -40,7 +40,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=18" />
+  <link rel="stylesheet" href="styles.css?v=19" />
+
+  <!-- Cloudflare Turnstile (bot protection) — test key for now; swap to real key once Turnstile site is created -->
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 
   <!-- Structured data: LocalBusiness for Google search & maps -->
   <script type="application/ld+json">
@@ -535,6 +538,8 @@
           </label>
         </div>
 
+        <div class="cf-turnstile" data-sitekey="1x00000000000000000000AA" data-theme="light" data-size="flexible"></div>
+
         <button type="submit" class="btn btn-primary btn-block">Submit Request</button>
         <p class="form-note">By submitting this form, you agree to our <a href="privacy.html">Privacy Policy</a>. We respond within one business day.</p>
       </form>
@@ -714,6 +719,8 @@
               <span>By checking this box and providing my phone number, I agree to receive SMS text messages from Relien Property Maintenance LLC regarding my inquiry. Message and data rates may apply. Reply STOP to opt out. See our <a href="privacy.html">Privacy Policy</a>.</span>
             </label>
           </div>
+          <div class="cf-turnstile" data-sitekey="1x00000000000000000000AA" data-theme="light" data-size="flexible"></div>
+
           <div class="modal-actions">
             <button type="button" class="btn btn-secondary" data-back>&larr; Back</button>
             <button type="submit" class="btn btn-primary">Submit Request</button>

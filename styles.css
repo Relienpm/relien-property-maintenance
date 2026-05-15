@@ -1549,6 +1549,12 @@ body.no-scroll { overflow: hidden; }
   line-height: 1.5;
 }
 
+/* Cloudflare Turnstile widget spacing */
+.cf-turnstile {
+  margin: 6px 0 14px;
+  min-height: 65px; /* reserves space before widget loads */
+}
+
 /* Inline form error banner */
 .form-error {
   display: none;
