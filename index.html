@@ -379,11 +379,8 @@
         </ul>
       </div>
 
-      <form class="contact-form" action="https://formsubmit.co/info@relienpm.com" method="POST">
+      <form class="contact-form" action="https://relien-form-handler.spring-feather-6100.workers.dev/" method="POST">
         <!-- FormSubmit configuration (hidden) -->
-        <input type="hidden" name="_subject" value="New quote request from relienpm.com" />
-        <input type="hidden" name="_template" value="table" />
-        <input type="hidden" name="_captcha" value="false" />
         <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
 
         <div class="form-row">
@@ -523,10 +520,7 @@
         <span class="progress-step"><span>3</span></span>
       </div>
 
-      <form class="modal-form" action="https://formsubmit.co/info@relienpm.com" method="POST">
-        <input type="hidden" name="_subject" value="New quote request from relienpm.com" />
-        <input type="hidden" name="_template" value="table" />
-        <input type="hidden" name="_captcha" value="false" />
+      <form class="modal-form" action="https://relien-form-handler.spring-feather-6100.workers.dev/" method="POST">
         <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
 
         <div class="modal-step is-active" data-step="1">
@@ -716,8 +710,8 @@
       if (banner) banner.classList.remove('is-visible');
     };
 
-    // ===== Intercept FormSubmit submissions, show thank-you popup =====
-    document.querySelectorAll('form[action*="formsubmit.co"]').forEach((form) => {
+    // ===== Intercept form submissions to Worker, show thank-you popup =====
+    document.querySelectorAll('.contact-form, .modal-form').forEach((form) => {
       form.addEventListener('submit', async (e) => {
         e.preventDefault();
         clearFormError(form);
@@ -728,20 +722,13 @@
           submitBtn.textContent = 'Sending…';
         }
 
-        // Build AJAX endpoint URL
-        const ajaxUrl = form.action.replace(
-          /formsubmit\.co\/(?!ajax)/,
-          'formsubmit.co/ajax/'
-        );
-
-        // FormSubmit AJAX prefers JSON
         const data = {};
         new FormData(form).forEach((value, key) => {
           data[key] = value;
         });
 
         try {
-          const res = await fetch(ajaxUrl, {
+          const res = await fetch(form.action, {
             method: 'POST',
             body: JSON.stringify(data),
             headers: {
@@ -749,14 +736,14 @@
               Accept: 'application/json',
             },
           });
-          if (!res.ok) {
-            throw new Error('HTTP ' + res.status);
-          }
           let json = null;
           try { json = await res.json(); } catch (_) {}
-          if (json && json.success && json.success !== 'true' && json.success !== true) {
-            throw new Error(json.message || 'submission_rejected');
+
+          if (!res.ok || !json || json.success !== true) {
+            const msg = json && json.error ? json.error : 'HTTP ' + res.status;
+            throw new Error(msg);
           }
+
           form.reset();
           const parentQuoteModal = form.closest('#quote-modal');
           if (parentQuoteModal && parentQuoteModal.classList.contains('is-open')) {
@@ -768,7 +755,7 @@
         } catch (err) {
           showFormError(
             form,
-            "We couldn't send that just now — our form provider is having a hiccup. Please try again in a few minutes."
+            "We couldn't send that just now. Please try again in a moment."
           );
           console.error('Form submission error:', err);
         } finally {
