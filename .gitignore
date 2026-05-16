@@ -3,3 +3,8 @@
 node_modules/
 .env
 .env.local
+
+# Print/handoff artifacts — keep local, don't deploy
+Relien Pamphlet.pdf
+Relien Site Build Summary.docx
+Relien Site Build Summary.pdf
