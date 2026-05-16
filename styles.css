@@ -21,45 +21,49 @@
   to   { transform: scaleX(1); }
 }
 
-/* Hero entrance on page load — staggered */
+/* Hero entrance on page load — staggered, tightened for snappier feel */
 .hero-content > * {
-  animation: fadeUp 0.75s ease-out backwards;
+  animation: fadeUp 0.5s ease-out backwards;
+  will-change: transform, opacity;
 }
-.hero-content > *:nth-child(1) { animation-delay: 0.10s; }
-.hero-content > *:nth-child(2) { animation-delay: 0.22s; }
-.hero-content > *:nth-child(3) { animation-delay: 0.34s; }
-.hero-content > *:nth-child(4) { animation-delay: 0.46s; }
-.hero-content > *:nth-child(5) { animation-delay: 0.58s; }
+.hero-content > *:nth-child(1) { animation-delay: 0.05s; }
+.hero-content > *:nth-child(2) { animation-delay: 0.12s; }
+.hero-content > *:nth-child(3) { animation-delay: 0.19s; }
+.hero-content > *:nth-child(4) { animation-delay: 0.26s; }
+.hero-content > *:nth-child(5) { animation-delay: 0.33s; }
 
 .hero-image {
-  animation: fadeInLeft 0.85s 0.05s ease-out backwards;
+  animation: fadeInLeft 0.6s 0.05s ease-out backwards;
+  will-change: transform, opacity;
 }
 
-/* Scroll-triggered reveals (toggled by IntersectionObserver) */
+/* Scroll-triggered reveals — shorter durations + GPU promotion */
 .reveal {
   opacity: 0;
-  transform: translateY(32px);
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  transform: translate3d(0, 22px, 0);
+  transition: opacity 0.45s ease-out, transform 0.45s ease-out;
+  will-change: transform, opacity;
 }
 .reveal.is-visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: translate3d(0, 0, 0);
 }
 
 .reveal-stagger > * {
   opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+  transform: translate3d(0, 20px, 0);
+  transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+  will-change: transform, opacity;
 }
 .reveal-stagger.is-visible > * {
   opacity: 1;
-  transform: translateY(0);
+  transform: translate3d(0, 0, 0);
 }
-.reveal-stagger.is-visible > *:nth-child(1) { transition-delay: 0.05s; }
-.reveal-stagger.is-visible > *:nth-child(2) { transition-delay: 0.18s; }
-.reveal-stagger.is-visible > *:nth-child(3) { transition-delay: 0.31s; }
-.reveal-stagger.is-visible > *:nth-child(4) { transition-delay: 0.44s; }
-.reveal-stagger.is-visible > *:nth-child(5) { transition-delay: 0.57s; }
+.reveal-stagger.is-visible > *:nth-child(1) { transition-delay: 0.03s; }
+.reveal-stagger.is-visible > *:nth-child(2) { transition-delay: 0.10s; }
+.reveal-stagger.is-visible > *:nth-child(3) { transition-delay: 0.17s; }
+.reveal-stagger.is-visible > *:nth-child(4) { transition-delay: 0.24s; }
+.reveal-stagger.is-visible > *:nth-child(5) { transition-delay: 0.31s; }
 
 /* Reduced-motion: kill all animation */
 @media (prefers-reduced-motion: reduce) {
@@ -760,7 +764,7 @@ li { margin-bottom: .35em; }
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  transition: transform 0.35s ease, box-shadow 0.35s ease, border-top-color 0.35s ease;
+  transition: transform 0.22s ease, box-shadow 0.22s ease, border-top-color 0.22s ease;
 }
 .service-card::before {
   content: '';
@@ -1025,9 +1029,10 @@ li { margin-bottom: .35em; }
 .kinetic-h1 .word {
   display: inline-block;
   opacity: 0;
-  transform: translateY(28px);
-  animation: wordSlideUp 0.65s cubic-bezier(.2, .7, .25, 1) forwards;
-  animation-delay: calc(0.45s + var(--i, 0) * 0.11s);
+  transform: translate3d(0, 22px, 0);
+  animation: wordSlideUp 0.45s cubic-bezier(.2, .7, .25, 1) forwards;
+  animation-delay: calc(0.25s + var(--i, 0) * 0.07s);
+  will-change: transform, opacity;
 }
 .kinetic-h1 .word.pencil-host { overflow: visible; }
 @keyframes wordSlideUp {
@@ -1208,21 +1213,17 @@ li { margin-bottom: .35em; }
 }
 .floating-cta.is-visible {
   opacity: 1;
-  transform: translateY(0) scale(1);
+  transform: translate3d(0, 0, 0) scale(1);
   pointer-events: auto;
-  animation: ctaPulse 3.5s 1s ease-in-out infinite;
 }
 .floating-cta:hover {
   background: var(--navy-deep);
+  transform: translate3d(0, -2px, 0) scale(1);
 }
 .floating-cta .cta-spark {
   width: 18px;
   height: 18px;
   color: var(--pale-blue);
-}
-@keyframes ctaPulse {
-  0%, 100% { box-shadow: 0 10px 30px rgba(20, 42, 71, 0.35); }
-  50% { box-shadow: 0 10px 30px rgba(20, 42, 71, 0.35), 0 0 0 8px rgba(168, 48, 42, 0.12); }
 }
 
 /* ============================================================
