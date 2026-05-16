@@ -1933,6 +1933,75 @@ body.no-scroll { overflow: hidden; }
 }
 
 /* ============================================================
+   Memberships — "What We Work On" section
+   ============================================================ */
+
+.mb-scope {
+  padding: 100px 0;
+  background: var(--white);
+}
+.mb-scope-sub {
+  margin: 16px auto 0;
+  max-width: 580px;
+  color: var(--text-muted);
+  font-size: 1rem;
+}
+.mb-scope-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  list-style: none;
+  padding: 0;
+  margin: 44px 0 32px;
+}
+.mb-scope-item {
+  position: relative;
+  padding: 18px 20px 18px 40px;
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 0.95rem;
+  color: var(--text);
+  font-weight: 500;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+.mb-scope-item:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+  border-color: var(--pale-blue);
+  background: var(--white);
+}
+.mb-scope-item::before {
+  content: '';
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  margin-top: -1px;
+  width: 14px;
+  height: 2px;
+  background: var(--red);
+  border-radius: 1px;
+}
+.mb-scope-note {
+  text-align: center;
+  color: var(--text-muted);
+  font-style: italic;
+  font-size: 0.9rem;
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+/* 5-step process variant (memberships page) */
+.process-steps--five {
+  grid-template-columns: repeat(5, 1fr);
+}
+.process-steps--five::before {
+  left: 10%;
+  right: 10%;
+}
+.process-steps--five .step { padding: 0 14px; }
+
+/* ============================================================
    Memberships — responsive
    ============================================================ */
 
@@ -1944,10 +2013,15 @@ body.no-scroll { overflow: hidden; }
   .mb-plan-card--featured { order: -1; }  /* feature it first on mobile */
   .mb-included { padding: 70px 0; }
   .mb-included-grid { grid-template-columns: 1fr; gap: 32px; }
+  .mb-scope { padding: 70px 0; }
+  .mb-scope-grid { grid-template-columns: repeat(2, 1fr); }
+  .process-steps--five { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 640px) {
   .mb-plan-price .num { font-size: 2.6rem; }
   .mb-hero-card { padding: 24px 22px 22px; }
   .mb-hero-card-line { font-size: 1.05rem; }
+  .mb-scope-grid { grid-template-columns: 1fr; }
+  .process-steps--five { grid-template-columns: 1fr; }
 }
 
