@@ -28,7 +28,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=24" />
+  <link rel="stylesheet" href="styles.css?v=27" />
 
   <!-- Cloudflare Turnstile -->
   <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
@@ -50,8 +50,8 @@
         <a href="index.html#contact">Contact</a>
       </nav>
       <div class="header-ctas">
-        <a href="memberships.html" class="header-cta header-cta-outline">Memberships</a>
-        <a href="index.html#contact" class="header-cta" data-open="quote-modal">Get a Quote</a>
+        <a href="memberships.html" class="header-cta" aria-current="page">Memberships</a>
+        <a href="index.html#contact" class="header-cta header-cta-outline" data-open="quote-modal">Get a Quote</a>
       </div>
     </div>
   </header>
@@ -68,7 +68,7 @@
           <span class="word" style="--i:3">up.</span>
         </h1>
         <p class="slogan">A subscription for the property you care about.</p>
-        <p class="lede">Predictable visits. One trusted partner. The same person handling your home every month, with a scheduled day and time you can plan around.</p>
+        <p class="lede">Predictable visits. One trusted partner. The same trusted quality every month, on a scheduled day and time you can plan around.</p>
         <div class="hero-actions">
           <a href="#plans" class="btn btn-primary">See the plans</a>
           <a href="#mb-form" class="btn btn-secondary">Tell us about your property</a>
@@ -100,13 +100,13 @@
 
         <article class="mb-plan-card">
           <p class="mb-plan-name">Minimum</p>
-          <p class="mb-plan-price"><span class="dollar">$</span><span class="num">220</span><span class="per">/ month</span></p>
-          <p class="mb-plan-rate">2 hours / month &nbsp;·&nbsp; $110/hr effective</p>
+          <p class="mb-plan-price"><span class="dollar">$</span><span class="num">190</span><span class="per">/ month</span></p>
+          <p class="mb-plan-rate">2 hours / month &nbsp;·&nbsp; $95/hr effective</p>
           <p class="mb-plan-best">Best for small homes and low-maintenance owners.</p>
           <ul class="mb-plan-inc">
             <li>2 hours of work each month</li>
             <li>One scheduled visit per month</li>
-            <li>Same trusted person every visit</li>
+            <li>Same trusted quality, every visit</li>
             <li>Trip fees waived</li>
           </ul>
           <a href="#mb-form" class="btn btn-secondary btn-block mb-plan-cta" data-plan="Minimum">Request Minimum</a>
@@ -121,7 +121,8 @@
           <ul class="mb-plan-inc">
             <li>4 hours of work each month</li>
             <li>One or two scheduled visits per month</li>
-            <li>Same trusted person every visit</li>
+            <li>Same trusted quality, every visit</li>
+            <li>Seasonal HVAC servicing</li>
             <li>Trip fees waived</li>
             <li>Priority scheduling</li>
           </ul>
@@ -136,7 +137,8 @@
           <ul class="mb-plan-inc">
             <li>8 hours of work each month</li>
             <li>Multiple scheduled visits per month</li>
-            <li>Same trusted person every visit</li>
+            <li>Same trusted quality, every visit</li>
+            <li>Seasonal HVAC servicing</li>
             <li>Trip fees waived</li>
             <li>Priority scheduling &amp; emergency response</li>
           </ul>
@@ -144,6 +146,8 @@
         </article>
 
       </div>
+
+      <p class="mb-plan-footnote reveal">Life happens, and we're flexible. Need to move a visit? Just give us reasonable notice and we'll find a new time that works.</p>
     </div>
   </section>
 
@@ -162,14 +166,19 @@
         <li class="mb-scope-item">Faucet &amp; light plumbing</li>
         <li class="mb-scope-item">Interior &amp; exterior painting</li>
         <li class="mb-scope-item">Finish carpentry &amp; molding</li>
-        <li class="mb-scope-item">Tile &amp; flooring touch-ups</li>
+        <li class="mb-scope-item">Lighting repair &amp; replacement</li>
         <li class="mb-scope-item">Light electrical work</li>
         <li class="mb-scope-item">Cabinet &amp; shelving install</li>
         <li class="mb-scope-item">Appliance installation</li>
+        <li class="mb-scope-item">Furniture assembly</li>
+        <li class="mb-scope-item">Minor lawn care</li>
+        <li class="mb-scope-item">Debris &amp; storm cleanup</li>
+        <li class="mb-scope-item">Gutter cleaning</li>
+        <li class="mb-scope-item">Air filter, bulb &amp; fridge-filter swaps</li>
         <li class="mb-scope-item">Property assessments &amp; diagnostics</li>
         <li class="mb-scope-item">General upkeep &amp; small repairs</li>
       </ul>
-      <p class="mb-scope-note reveal">For specialty work like full HVAC service, panel-level electrical, or major plumbing, we refer you to a trusted network of licensed professionals.</p>
+      <p class="mb-scope-note reveal">For specialty work like major HVAC repair or replacement, panel-level electrical, or major plumbing, we refer you to a trusted network of professionals.</p>
     </div>
   </section>
 
@@ -184,8 +193,8 @@
       <ul class="mb-included-list reveal-stagger">
         <li>
           <span class="mb-incl-num">01</span>
-          <strong>The same trusted person, every visit.</strong>
-          <p>You're not handing your house off to a rotating crew. The relationship is the product.</p>
+          <strong>The same trusted quality, every visit.</strong>
+          <p>Careful, consistent work you can count on, visit after visit. No rotating cast of strangers, no dip in standards.</p>
         </li>
         <li>
           <span class="mb-incl-num">02</span>
@@ -195,7 +204,7 @@
         <li>
           <span class="mb-incl-num">03</span>
           <strong>Materials priced transparently.</strong>
-          <p>Receipts on request. Standard markup. No surprise charges.</p>
+          <p>Billed at cost. Receipts on request. No markup, no surprise charges.</p>
         </li>
         <li>
           <span class="mb-incl-num">04</span>
@@ -206,6 +215,11 @@
           <span class="mb-incl-num">05</span>
           <strong>Same-day follow-up after each visit.</strong>
           <p>A quick note after we leave so you know exactly what was done and what's next.</p>
+        </li>
+        <li>
+          <span class="mb-incl-num">06</span>
+          <strong>Preventative care that pays for itself.</strong>
+          <p>Small, regular upkeep like gutter cleaning and filter changes heads off the costly repairs later. Maintenance is an investment that protects your property's value.</p>
         </li>
       </ul>
     </div>
@@ -274,7 +288,7 @@
             </svg>
           </div>
           <h3>Visit</h3>
-          <p>We show up on schedule and work through your list. Same person. Same time. Every month. You stop thinking about it.</p>
+          <p>We show up on schedule and work through your list. Trusted quality. Same time. Every month. You stop thinking about it.</p>
         </div>
 
       </div>
@@ -307,12 +321,12 @@
 
         <div class="faq-item">
           <h3>How are materials priced?</h3>
-          <p>Transparently. We bill materials at our cost with a standard markup, and we'll show you the receipts on request.</p>
+          <p>Transparently. We bill materials at our cost, with no markup, and we'll show you the receipts on request.</p>
         </div>
 
         <div class="faq-item">
           <h3>What isn't included?</h3>
-          <p>Specialty trades that require a licensed professional, like full HVAC service, panel-level electrical, or major plumbing. For those, we refer you to a trusted network of pros we vouch for.</p>
+          <p>Specialty trades like major HVAC repair or replacement, panel-level electrical, or major plumbing. Routine HVAC servicing is included on Basic and Premium plans; for the bigger jobs, we refer you to a trusted network of pros we vouch for.</p>
         </div>
 
         <div class="faq-item">
@@ -375,7 +389,7 @@
 
         <fieldset class="radio-group">
           <legend>Which plan are you interested in? *</legend>
-          <label class="radio-row"><input type="radio" name="Plan Interest" value="Minimum" required /><span>Minimum &mdash; $220/mo</span></label>
+          <label class="radio-row"><input type="radio" name="Plan Interest" value="Minimum" required /><span>Minimum &mdash; $190/mo</span></label>
           <label class="radio-row"><input type="radio" name="Plan Interest" value="Basic"   /><span>Basic &mdash; $350/mo (most popular)</span></label>
           <label class="radio-row"><input type="radio" name="Plan Interest" value="Premium" /><span>Premium &mdash; $650/mo</span></label>
           <label class="radio-row"><input type="radio" name="Plan Interest" value="Annual"  /><span>Annual (10% off) &mdash; tell me more</span></label>

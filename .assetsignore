@@ -7,3 +7,9 @@ README.md
 wrangler.jsonc
 *.log
 .DS_Store
+
+# Print/handoff artifacts — keep local, never publish
+Relien Pamphlet*.pdf
+Relien Site Build Summary.pdf
+Relien Site Build Summary.docx
+*.docx

@@ -40,7 +40,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=24" />
+  <link rel="stylesheet" href="styles.css?v=27" />
   <!-- Preload the hero photo so it doesn't wait on layout calc -->
   <link rel="preload" as="image" href="images/logo.png" />
 
@@ -134,8 +134,8 @@
         <a href="#contact">Contact</a>
       </nav>
       <div class="header-ctas">
-        <a href="memberships.html" class="header-cta header-cta-outline">Memberships</a>
-        <a href="#contact" class="header-cta" data-open="quote-modal">Get a Quote</a>
+        <a href="memberships.html" class="header-cta header-cta-breathing">Memberships</a>
+        <a href="#contact" class="header-cta header-cta-outline" data-open="quote-modal">Get a Quote</a>
       </div>
     </div>
   </header>
@@ -159,7 +159,7 @@
         <p class="lede">Trusted property maintenance for homes, businesses, and rental properties. Repairs, improvements, and emergency response, done right the first time.</p>
         <div class="hero-actions">
           <a href="#contact" class="btn btn-primary" data-open="quote-modal">Request a Quote</a>
-          <a href="#services" class="btn btn-secondary">Explore Services</a>
+          <a href="memberships.html" class="btn btn-secondary">Explore Memberships</a>
         </div>
       </div>
     </div>
@@ -175,9 +175,9 @@
         <p class="eyebrow">About Relien</p>
         <h2>Dedicated to Reliable Property Maintenance</h2>
         <p>Welcome to Relien Property Maintenance LLC. I'm <strong>Andrew Wenzler</strong>. I built Relien to be the partner property owners actually want to call. One contact. One standard of work. A name behind the brand.</p>
-        <p>We work with homeowners, business owners, and rental property investors who need reliable service that protects their property's value and respects their tenants' time.</p>
+        <p>We work with property managers, investors, business owners, and home owners who need reliable service that protects their property's value and respects their tenants' time.</p>
         <p>Our commitment is to ensure your property is safe, well-maintained, and in top condition at all times.</p>
-        <a href="#services" class="btn btn-primary">Discover Our Services</a>
+        <a href="memberships.html" class="btn btn-primary">Discover Our Memberships</a>
       </div>
     </div>
   </section>
@@ -216,7 +216,7 @@
             <ul>
               <li>Interior &amp; exterior painting</li>
               <li>Fixture &amp; hardware upgrades</li>
-              <li>Tile &amp; flooring updates</li>
+              <li>Interior &amp; exterior door replacement</li>
               <li>Bathroom &amp; kitchen refresh</li>
               <li>Make-ready &amp; pre-listing refreshes</li>
             </ul>
@@ -251,6 +251,21 @@
           <li>Landlords &amp; property managers</li>
         </ul>
         <p class="built-for-tagline">One contact for the entire portfolio.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MEMBERSHIP CALLOUT ============ -->
+  <section class="membership-callout">
+    <div class="container membership-callout-inner reveal">
+      <div class="membership-callout-text">
+        <p class="eyebrow membership-callout-eyebrow">Monthly Memberships</p>
+        <h2>Never think about property upkeep again.</h2>
+        <p>Beyond one-off jobs, Relien offers monthly maintenance memberships: predictable, scheduled visits that handle the range of work your property needs, at the same trusted quality every time. Preventative care that protects your property's value and saves you money down the road.</p>
+      </div>
+      <div class="membership-callout-actions">
+        <a href="memberships.html" class="btn btn-primary">Explore Memberships</a>
+        <a href="memberships.html#plans" class="btn btn-secondary">See the plans</a>
       </div>
     </div>
   </section>
@@ -319,39 +334,58 @@
         <p class="eyebrow">Trusted By</p>
         <h2>Our Referrals</h2>
       </header>
-      <div class="referrals-grid reveal-stagger">
+      <div class="referrals-scroller reveal-stagger" role="list" aria-label="Client referrals, scroll horizontally">
 
-        <figure class="testimonial">
+        <figure class="testimonial" role="listitem">
           <blockquote>
             <p>"Andrew and his team at Relien Property Maintenance are professional, responsive, fair, and varsity in many skills that made a recent project a breeze. Quality work and meeting expectations gives me confidence to use and recommend them for future projects."</p>
           </blockquote>
           <figcaption>
-            <strong>Daniel Friday</strong>
-            <span>Keller Williams</span>
+            <span class="testimonial-avatar" aria-hidden="true">
+              <img src="images/ref-daniel.jpg" alt="" loading="lazy" onerror="this.remove()" />
+              <span class="avatar-initials">DF</span>
+            </span>
+            <span class="testimonial-meta">
+              <strong>Daniel Friday</strong>
+              <span>Keller Williams</span>
+            </span>
           </figcaption>
         </figure>
 
-        <figure class="testimonial">
+        <figure class="testimonial" role="listitem">
           <blockquote>
             <p>"Relien Property Maintenance LLC exceeded our expectations with their property repairs. The team was knowledgeable, and the results have enhanced the safety and aesthetics of our property!"</p>
           </blockquote>
           <figcaption>
-            <strong>Blake Shultz</strong>
-            <span>ARC Realty</span>
+            <span class="testimonial-avatar" aria-hidden="true">
+              <img src="images/ref-blake.jpg" alt="" loading="lazy" onerror="this.remove()" />
+              <span class="avatar-initials">BS</span>
+            </span>
+            <span class="testimonial-meta">
+              <strong>Blake Shultz</strong>
+              <span>ARC Realty</span>
+            </span>
           </figcaption>
         </figure>
 
-        <figure class="testimonial">
+        <figure class="testimonial" role="listitem">
           <blockquote>
             <p>"Outstanding service! Relien Property Maintenance LLC was punctual, professional, and completed the work to perfection. Their attention to detail and commitment to customer satisfaction truly set them apart!"</p>
           </blockquote>
           <figcaption>
-            <strong>Harold Collins</strong>
-            <span>The Collins Group</span>
+            <span class="testimonial-avatar" aria-hidden="true">
+              <img src="images/ref-harold.jpg" alt="" loading="lazy" onerror="this.remove()" />
+              <span class="avatar-initials">HC</span>
+            </span>
+            <span class="testimonial-meta">
+              <strong>Harold Collins</strong>
+              <span>The Collins Group</span>
+            </span>
           </figcaption>
         </figure>
 
       </div>
+      <p class="referrals-scroll-hint reveal" aria-hidden="true">Scroll for more &rarr;</p>
 
       <div class="referrals-social reveal">
         <p class="referrals-social-label">Verified on</p>
@@ -815,6 +849,18 @@
       modal.querySelectorAll('[data-back]').forEach((btn) => {
         btn.addEventListener('click', () => showStep(currentStep - 1));
       });
+    }
+
+    // ===== Referrals scroll hint: only show when the track overflows =====
+    const refScroller = document.querySelector('.referrals-scroller');
+    const refHint = document.querySelector('.referrals-scroll-hint');
+    if (refScroller && refHint) {
+      const updateHint = () => {
+        const overflowing = refScroller.scrollWidth > refScroller.clientWidth + 8;
+        refHint.style.display = overflowing ? '' : 'none';
+      };
+      updateHint();
+      window.addEventListener('resize', updateHint, { passive: true });
     }
 
     // ===== Floating CTA visibility =====

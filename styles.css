@@ -204,16 +204,27 @@ li { margin-bottom: .35em; }
   fill: none;
   stroke-linecap: round;
   stroke-linejoin: round;
-  vector-effect: non-scaling-stroke;
 }
-/* GPU-accelerated draw-in using clip-path instead of stroke-dashoffset.
-   stroke-dashoffset animation runs on CPU and causes jank on slower devices.
-   clip-path inset is hardware-accelerated and stays smooth. */
+/* GPU-accelerated draw-in using clip-path.
+   Key smoothness tricks:
+   - Delay starts at 1.55s so the pencil draws AFTER all kinetic hero words
+     have finished settling. No will-change layer conflicts on the parent.
+   - translateZ(0) + backface-visibility promote the SVG to its own
+     compositor layer (critical for Safari/iOS where SVG clip-path can
+     otherwise fall back to CPU rasterization).
+   - contain: paint lets the browser cache the SVG as a static texture
+     so only the clip rect updates per frame.
+   - vector-effect: non-scaling-stroke was removed because it forces the
+     stroke to recompute every frame, defeating the texture cache. */
 .pencil-underline {
   clip-path: inset(0 100% 0 0);
   -webkit-clip-path: inset(0 100% 0 0);
-  animation: drawPencil 0.9s 0.85s cubic-bezier(.55, .1, .35, 1) forwards;
-  will-change: clip-path;
+  animation: drawPencil 0.9s 1.85s cubic-bezier(.55, .1, .35, 1) forwards;
+  will-change: clip-path, transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  contain: paint;
 }
 @keyframes drawPencil {
   to {
@@ -491,15 +502,86 @@ li { margin-bottom: .35em; }
   background: var(--navy);
 }
 
+/* ---------- Membership callout ---------- */
+.membership-callout {
+  padding: 76px 0;
+  background: var(--navy);
+  color: var(--white);
+}
+.membership-callout-inner {
+  display: grid;
+  grid-template-columns: 1.5fr auto;
+  align-items: center;
+  gap: 40px;
+}
+.membership-callout-eyebrow { color: var(--pale-blue); }
+.membership-callout-text h2 {
+  color: var(--white);
+  margin: 0 0 14px;
+}
+.membership-callout-text p {
+  color: var(--pale-blue);
+  margin: 0;
+  max-width: 62ch;
+}
+.membership-callout-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 220px;
+}
+.membership-callout .btn-primary {
+  background: var(--white);
+  border-color: var(--white);
+  color: var(--navy);
+}
+.membership-callout .btn-primary:hover {
+  background: var(--pale-blue);
+  border-color: var(--pale-blue);
+  color: var(--navy-deep);
+}
+.membership-callout .btn-secondary {
+  background: transparent;
+  border-color: rgba(255, 255, 255, 0.55);
+  color: var(--white);
+}
+.membership-callout .btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: var(--white);
+  color: var(--white);
+}
+@media (max-width: 900px) {
+  .membership-callout-inner { grid-template-columns: 1fr; gap: 26px; }
+  .membership-callout-actions { flex-direction: row; flex-wrap: wrap; min-width: 0; }
+  .membership-callout-actions .btn { flex: 1; min-width: 160px; }
+}
+
 /* ---------- Referrals ---------- */
 .referrals {
   padding: 100px 0;
   background: var(--white);
 }
-.referrals-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+.referrals-scroller {
+  display: flex;
   gap: 28px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding-left: 4px;
+  padding: 4px 4px 20px;
+  margin: 0 -4px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: var(--navy-soft) var(--pale-blue);
+}
+.referrals-scroller::-webkit-scrollbar { height: 8px; }
+.referrals-scroller::-webkit-scrollbar-track { background: var(--pale-blue); border-radius: 999px; }
+.referrals-scroller::-webkit-scrollbar-thumb { background: var(--navy-soft); border-radius: 999px; }
+.referrals-scroll-hint {
+  margin: 6px 4px 0;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--navy-soft);
 }
 .testimonial {
   background: var(--pale-blue);
@@ -509,6 +591,8 @@ li { margin-bottom: .35em; }
   position: relative;
   display: flex;
   flex-direction: column;
+  flex: 0 0 clamp(280px, 78%, 380px);
+  scroll-snap-align: start;
 }
 .testimonial::before {
   content: '"';
@@ -534,11 +618,44 @@ li { margin-bottom: .35em; }
   border-top: 1px solid rgba(30, 58, 95, 0.18);
   padding-top: 16px;
   display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 14px;
+}
+.testimonial-avatar {
+  position: relative;
+  flex: 0 0 auto;
+  width: 52px;
+  height: 52px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: var(--navy);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.testimonial-avatar img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.avatar-initials {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.03em;
+  color: var(--white);
+}
+.testimonial-meta {
+  display: flex;
   flex-direction: column;
   gap: 2px;
+  min-width: 0;
 }
-.testimonial figcaption strong { color: var(--navy); font-size: 1rem; }
-.testimonial figcaption span { color: var(--navy-soft); font-size: 0.85rem; }
+.testimonial-meta strong { color: var(--navy); font-size: 1rem; }
+.testimonial-meta span { color: var(--navy-soft); font-size: 0.85rem; }
 
 /* Social proof pills below testimonials */
 .referrals-social {
@@ -1039,9 +1156,12 @@ li { margin-bottom: .35em; }
 .kinetic-h1 .word {
   display: inline-block;
   opacity: 0;
-  transform: translate3d(0, 28px, 0);
-  animation: wordSlideUp 0.65s cubic-bezier(.2, .7, .25, 1) forwards;
-  animation-delay: calc(0.45s + var(--i, 0) * 0.11s);
+  transform: translate3d(0, 18px, 0);
+  /* Softer ease-out (no aggressive launch at the start) + shorter travel
+     distance + slight duration bump. Together these eliminate the
+     "pop-pop-pop" clunky feel of rapid staggered words. */
+  animation: wordSlideUp 0.8s cubic-bezier(.16, .84, .3, 1) forwards;
+  animation-delay: calc(0.45s + var(--i, 0) * 0.12s);
   will-change: transform, opacity;
 }
 .kinetic-h1 .word.pencil-host { overflow: visible; }
@@ -1594,8 +1714,7 @@ body.no-scroll { overflow: hidden; }
   }
   .hero-image { max-width: 420px; margin: 0 auto; }
   .about-image { aspect-ratio: 16 / 11; max-width: 560px; }
-  .services-grid,
-  .referrals-grid {
+  .services-grid {
     grid-template-columns: 1fr;
     gap: 20px;
   }
@@ -1678,8 +1797,48 @@ body.no-scroll { overflow: hidden; }
   color: var(--white) !important;
 }
 
-@media (max-width: 960px) {
-  .header-cta-outline { display: none; }
+/* On mobile, keep BOTH header CTAs visible.
+   Compact sizing keeps the header from crowding. */
+@media (max-width: 640px) {
+  .header-cta-outline {
+    padding: 7px 12px;
+    font-size: 0.8rem;
+    border-width: 1.5px;
+  }
+}
+
+/* ----------------------------------------------------------------
+   Breathing ring on the Memberships CTA.
+   A soft navy halo just outside the button gently fades in and out.
+   Goal: peripherally noticeable, never pushy. ~5s breath rhythm
+   reads as "alive" rather than "look at me." Pure opacity animation
+   on a sibling pseudo-element — GPU-friendly, no box-shadow repaint.
+   ---------------------------------------------------------------- */
+.header-cta-breathing {
+  position: relative;
+  isolation: isolate;
+}
+.header-cta-breathing::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border: 1.5px solid var(--navy);
+  border-radius: calc(var(--radius-sm) + 4px);
+  opacity: 0;
+  pointer-events: none;
+  z-index: -1;
+  animation: breatheRing 5s ease-in-out infinite;
+  animation-delay: 2s;
+  will-change: opacity;
+}
+@keyframes breatheRing {
+  0%, 100% { opacity: 0; }
+  50%      { opacity: 0.55; }
+}
+/* Hovering the button = user found it. Stop pulsing. */
+.header-cta-breathing:hover::after { animation: none; opacity: 0; }
+@media (prefers-reduced-motion: reduce) {
+  .header-cta-breathing::after { animation: none; }
 }
 
 /* ============================================================
@@ -1771,6 +1930,15 @@ body.no-scroll { overflow: hidden; }
   gap: 24px;
   align-items: stretch;
 }
+.mb-plan-footnote {
+  margin: 28px auto 0;
+  max-width: 760px;
+  text-align: center;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+.mb-plan-footnote sup { color: var(--navy); font-weight: 700; }
 .mb-plan-card {
   position: relative;
   background: var(--white);
